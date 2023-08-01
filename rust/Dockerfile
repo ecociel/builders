@@ -18,6 +18,6 @@ RUN apt-get update \
     && apt-get remove -y --auto-remove wget \
     && rm -rf /var/lib/apt/lists/*
 
-RUN cargo install cargo-chef --locked
+#RUN cargo install cargo-chef --locked
 RUN apt update && apt-get install -y musl-tools
 RUN rustup target add x86_64-unknown-linux-musl
