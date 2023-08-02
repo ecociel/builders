@@ -40,7 +40,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
 RUN case ${TARGETARCH} in \
                 "amd64")  RUSTUP_ARCH=x86_64-unknown-linux-musl && echo "DOOOOOOO" ;; \
                 "arm64")  RUSTUP_ARCH=aarch64-unknown-linux-musl && echo "GOOOOOOO" ;; \
-            esac \
+            esac && \
             echo "XXXXXXXX "${RUSTUP_ARCH}
 
 RUN echo "===================== "${RUSTUP_ARCH}
