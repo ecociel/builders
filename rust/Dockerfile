@@ -10,7 +10,7 @@ RUN echo "BBBB "$TARGETPLATFORM
 RUN echo "CCCC "$TARGETARCH
 RUN echo "DDDD "$TARGETOS
 
-ENV RUSTUP_ARCH=xxxx
+#RUSTUP_ARCH=xxxx
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH
@@ -38,9 +38,11 @@ ENV RUSTUP_HOME=/usr/local/rustup \
 
 RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates gcc libc6-dev wget
 RUN case ${TARGETARCH} in \
-                "amd64")  RUSTUP_ARCH=x86_64-unknown-linux-musl ;; \
-                "arm64")  RUSTUP_ARCH=aarch64-unknown-linux-musl ;; \
-            esac
+                "amd64")  RUSTUP_ARCH=x86_64-unknown-linux-musl && echo "DOOOOOOO" ;; \
+                "arm64")  RUSTUP_ARCH=aarch64-unknown-linux-musl && echo "GOOOOOOO" ;; \
+            esac \
+            echo "XXXXXXXX "${RUSTUP_ARCH}
+
 RUN echo "===================== "${RUSTUP_ARCH}
 RUN wget "https://static.rust-lang.org/rustup/dist/${RUSTUP_ARCH}/rustup-init"
 RUN chmod +x /rustup-init
