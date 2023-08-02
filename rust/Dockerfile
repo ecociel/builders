@@ -40,21 +40,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
 RUN case ${TARGETARCH} in \
                 "amd64")  RUSTUP_ARCH=x86_64-unknown-linux-musl && echo "DOOOOOOO" ;; \
                 "arm64")  RUSTUP_ARCH=aarch64-unknown-linux-musl && echo "GOOOOOOO" ;; \
-            esac && \
-            echo "XXXXXXXX "${RUSTUP_ARCH}
-
-RUN echo "===================== "${RUSTUP_ARCH}
-RUN wget "https://static.rust-lang.org/rustup/dist/${RUSTUP_ARCH}/rustup-init"
-RUN chmod +x /rustup-init
-RUN ./rustup-init -y --no-modify-path --default-toolchain nightly --default-host=${RUSTUP_ARCH}
-RUN rm rustup-init
-RUN chmod -R a+w $RUSTUP_HOME $CARGO_HOME
-RUN rustup --version
-RUN cargo --version
-RUN rustc --version
-RUN apt-get remove -y --auto-remove wget
-RUN rm -rf /var/lib/apt/lists/*
-
-
-RUN apt update && apt-get install -y musl-tools
-RUN rustup target add ${RUSTUP_ARCH}
+            esac \
+  && wget "https://static.rust-lang.org/rustup/dist/${RUSTUP_ARCH}/rustup-init" \
+  && chmod +x /rustup-init \
+  && ./rustup-init -y --no-modify-path --default-toolchain nightly --default-host=${RUSTUP_ARCH} \
+  && rm rustup-init \
+  && chmod -R a+w $RUSTUP_HOME $CARGO_HOME \
+  && rustup --version \
+  && cargo --version \
+  && rustc --version \
+  && apt-get remove -y --auto-remove wget \
+  && rm -rf /var/lib/apt/lists/* \
+  && apt update && apt-get install -y musl-tools \
+  && rustup target add ${RUSTUP_ARCH} \
