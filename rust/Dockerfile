@@ -41,10 +41,10 @@ RUN case ${TARGETARCH} in \
                 "amd64")  RUSTUP_ARCH=x86_64-unknown-linux-musl ;; \
                 "arm64")  RUSTUP_ARCH=aarch64-unknown-linux-musl ;; \
             esac
-RUN echo "===================== "$RUSTUP_ARCH
-RUN wget "https://static.rust-lang.org/rustup/dist/$RUSTUP_ARCH/rustup-init"
+RUN echo "===================== "${RUSTUP_ARCH}
+RUN wget "https://static.rust-lang.org/rustup/dist/${RUSTUP_ARCH}/rustup-init"
 RUN chmod +x /rustup-init
-RUN ./rustup-init -y --no-modify-path --default-toolchain nightly --default-host=$RUSTUP_ARCH
+RUN ./rustup-init -y --no-modify-path --default-toolchain nightly --default-host=${RUSTUP_ARCH}
 RUN rm rustup-init
 RUN chmod -R a+w $RUSTUP_HOME $CARGO_HOME
 RUN rustup --version
@@ -55,4 +55,4 @@ RUN rm -rf /var/lib/apt/lists/*
 
 
 RUN apt update && apt-get install -y musl-tools
-RUN rustup target add $RUSTUP_ARCH
+RUN rustup target add ${RUSTUP_ARCH}
