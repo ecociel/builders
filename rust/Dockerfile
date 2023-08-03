@@ -29,7 +29,6 @@ RUN apt-get update \
     && cargo --version \
     && rustc --version \
     && apt-get remove -y --auto-remove wget \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
     && apt update && apt-get install -y musl-tools \
-    && rustup target add ${MUSL_ARCH} \
-
+    && rustup target add ${MUSL_ARCH}
