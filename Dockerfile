@@ -7,7 +7,7 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     PATH=/usr/local/cargo/bin:$PATH
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates gcc libc6-dev wget \
+    && apt-get install -y --no-install-recommends ca-certificates gcc libc6-dev wget libssl-dev \
     &&  case ${TARGETARCH} in \
                 "amd64")  RUSTUP_ARCH=x86_64-unknown-linux-gnu MUSL_ARCH=x86_64-unknown-linux-musl ;; \
                 "arm64")  RUSTUP_ARCH=aarch64-unknown-linux-gnu MUSL_ARCH=aarch64-unknown-linux-musl ;; \
@@ -22,5 +22,5 @@ RUN apt-get update \
     && rustc --version \
     && apt-get remove -y --auto-remove wget \
     && rm -rf /var/lib/apt/lists/* \
-    && apt update && apt-get install -y musl-tools \
+    && apt update && apt-get install -y pkg-config musl-tools \
     && rustup target add ${MUSL_ARCH}

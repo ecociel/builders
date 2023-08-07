@@ -29,3 +29,18 @@ USER scratchuser
 CMD ["/app"]
 
 ~~~~
+
+# References
+
+- [Link statically with libssl](https://blog.davidvassallo.me/2021/06/10/lessons-learned-building-statically-linked-rust-binaries-openssl/)
+~~~~
+[dependencies]
+# ...
+openssl = { version = "*", features = ["vendored"] } #https://docs.rs/openssl/0.10.34/openssl/#vendored
+~~~~
+~~~~
+cargo build --target x86_64-unknown-linux-musl --release
+~~~~
+
+
+
