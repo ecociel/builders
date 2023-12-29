@@ -1,5 +1,5 @@
 #FROM debian:buster-slim
-FROM debian:buster
+FROM debian:bookworm
 
 ARG TARGETARCH
 
