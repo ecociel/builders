@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bookworm
 
 ARG TARGETARCH
 
@@ -6,8 +6,10 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH
 
+#    && apt-get install -y --no-install-recommends ca-certificates gcc libc6-dev wget libssl-dev \
+
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates gcc libc6-dev wget libssl-dev \
+    && apt-get install -y ca-certificates gcc libc6-dev wget libssl-dev \
     && protobuf-compiler libprotobuf-dev \
     &&  case ${TARGETARCH} in \
                 "amd64")  RUSTUP_ARCH=x86_64-unknown-linux-gnu MUSL_ARCH=x86_64-unknown-linux-musl ;; \
