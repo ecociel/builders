@@ -1,4 +1,5 @@
 FROM debian:bookworm
+MAINTAINER ecociel <devs@ecociel.ch>
 
 ARG TARGETARCH
 
