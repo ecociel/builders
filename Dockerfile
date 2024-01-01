@@ -7,6 +7,7 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH
 
+RUN ls 
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates gcc libc6-dev wget libssl-dev \
