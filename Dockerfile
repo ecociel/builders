@@ -7,16 +7,14 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH
 
-# Still trying to solve the protobuf apt error, this might help
-# https://lukasjoswiak.com/github-actions-protobuf/
+#RUN apt update 
+#RUN apt install -y ca-certificates gcc libc6-dev wget libssl-dev
+#RUN apt install -y libprotobuf-dev 
+#RUN apt install -y protobuf-compiler
 
-RUN ls -al
+RUN apt update -y && apt install -y ca-certificates gcc libc6-dev wget libssl-dev libprotobuf-dev protobuf-compiler
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates gcc libc6-dev wget libssl-dev \
-    #&& libprotobuf-dev protobuf-compiler \
-    && protobuf-compiler \
-    &&  case ${TARGETARCH} in \
+RUN case ${TARGETARCH} in \
                 "amd64")  RUSTUP_ARCH=x86_64-unknown-linux-gnu MUSL_ARCH=x86_64-unknown-linux-musl ;; \
                 "arm64")  RUSTUP_ARCH=aarch64-unknown-linux-gnu MUSL_ARCH=aarch64-unknown-linux-musl ;; \
             esac \
@@ -32,3 +30,5 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && apt update && apt-get install -y pkg-config musl-tools \
     && rustup target add ${MUSL_ARCH}
+
+RUN rustc --version | cut -d ' ' -f 2
