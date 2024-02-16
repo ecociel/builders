@@ -14,7 +14,8 @@ RUN ls -al
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates gcc libc6-dev wget libssl-dev \
-    && libprotobuf-dev protobuf-compiler \
+    #&& libprotobuf-dev protobuf-compiler \
+    && protobuf-compiler \
     &&  case ${TARGETARCH} in \
                 "amd64")  RUSTUP_ARCH=x86_64-unknown-linux-gnu MUSL_ARCH=x86_64-unknown-linux-musl ;; \
                 "arm64")  RUSTUP_ARCH=aarch64-unknown-linux-gnu MUSL_ARCH=aarch64-unknown-linux-musl ;; \
