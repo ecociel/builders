@@ -7,11 +7,6 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH
 
-#RUN apt update 
-#RUN apt install -y ca-certificates gcc libc6-dev wget libssl-dev
-#RUN apt install -y libprotobuf-dev 
-#RUN apt install -y protobuf-compiler
-
 RUN apt update -y && apt install -y ca-certificates gcc libc6-dev wget libssl-dev libprotobuf-dev protobuf-compiler
 
 RUN case ${TARGETARCH} in \
