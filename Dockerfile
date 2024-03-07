@@ -10,7 +10,7 @@ ENV RUSTUP_HOME=/usr/local/rustup \
 RUN apt update -y && apt install -y ca-certificates gcc libc6-dev wget libssl-dev libprotobuf-dev protobuf-compiler qemu-user gnupg lsb-release software-properties-common
 
 COPY llvm-snapshot.gpg.key llvm-snapshot.gpg.key
-#RUN lsb_release --codename --short
+RUN lsb_release --codename --short
 #RUN export ubuntu_codename=$(lsb_release --codename --short)
 #RUN env
 ARG llvm_version=18
