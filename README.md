@@ -1,46 +1,19 @@
 # rust-builder
 
-A builder image for building static rust binaries for multiple platforms.
+A builder image for building static rust binaries for amd64 and arm64 platforms.
+
+# Create a new version
+
+    git tag <rust-version>-nightly-<suffix>
+    git push origin <rust-version>-nightly-<suffix>
+
+This will trigger the github action and create and tag a new image.
+
+
 
 # Usage
 
 ~~~~
-FROM ghcr.io/ecociel/rust-builder:1.73.0-nightly as builder
+FROM ghcr.io/ecociel/rust-builder:<tag> as builder
 
-ARG TARGETARCH
-
-RUN useradd -u 10001 scratchuser
-WORKDIR /usr/local/src/app
-COPY . .
-RUN case ${TARGETARCH} in \
-                "amd64")  MUSL_ARCH=x86_64-unknown-linux-musl ;; \
-                "arm64")  MUSL_ARCH=aarch64-unknown-linux-musl ;; \
-            esac \
-   && cargo build --release --target ${MUSL_ARCH} --package myapp \
-   && mv /usr/local/src/app/target/${MUSL_ARCH}/release/myapp /usr/local/bin/app
-
-FROM scratch AS runtime
-COPY --from=builder /usr/local/bin/app /app
-COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
-COPY --from=builder /etc/passwd /etc/passwd
-
-USER scratchuser
-
-CMD ["/app"]
-
-~~~~
-
-# References
-
-- [Link statically with libssl](https://blog.davidvassallo.me/2021/06/10/lessons-learned-building-statically-linked-rust-binaries-openssl/)
-~~~~
-[dependencies]
-# ...
-openssl = { version = "*", features = ["vendored"] } #https://docs.rs/openssl/0.10.34/openssl/#vendored
-~~~~
-~~~~
-cargo build --target x86_64-unknown-linux-musl --release
-~~~~
-
-
-
+TBD

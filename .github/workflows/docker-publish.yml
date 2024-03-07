@@ -1,11 +1,11 @@
 name: Docker
 
 on:
-  #schedule:
-  #  - cron: '45 13 * * *'
-  push:
-    #branches: [ "main" ]
-    tags: [ '1.*' ]
+  schedule:
+    - cron: '0 10 * * *'
+  #push:
+  #  #branches: [ "main" ]
+  #  tags: [ '1.*' ]
 
 env:
   REGISTRY: ghcr.io
