@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:buster
 MAINTAINER ecociel <devs@ecociel.ch>
 
 ARG TARGETARCH
@@ -7,7 +7,18 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH
 
-RUN apt update -y && apt install -y ca-certificates gcc libc6-dev wget libssl-dev libprotobuf-dev protobuf-compiler
+RUN apt update -y && apt install -y ca-certificates gcc libc6-dev wget libssl-dev libprotobuf-dev protobuf-compiler qemu-user gnupg lsb-release software-properties-common
+
+COPY llvm-snapshot.gpg.key llvm-snapshot.gpg.key
+#RUN lsb_release --codename --short
+#RUN export ubuntu_codename=$(lsb_release --codename --short)
+#RUN env
+ARG llvm_version=18
+ARG ubuntu_codename=buster
+RUN apt-key add llvm-snapshot.gpg.key
+RUN add-apt-repository "deb http://apt.llvm.org/${ubuntu_codename}/ llvm-toolchain-${ubuntu_codename}-${llvm_version} main"
+RUN apt update -y && apt install -y clang-${llvm_version} llvm-${llvm_version}
+
 
 RUN case ${TARGETARCH} in \
                 "amd64")  RUSTUP_ARCH=x86_64-unknown-linux-gnu MUSL_ARCH=x86_64-unknown-linux-musl ;; \
@@ -27,3 +38,4 @@ RUN case ${TARGETARCH} in \
     && rustup target add ${MUSL_ARCH}
 
 RUN rustc --version | cut -d ' ' -f 2
+
