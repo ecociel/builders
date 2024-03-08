@@ -3,7 +3,7 @@ name: Docker
 on:
   schedule:
     #- cron: '0 10 * * *'
-    - cron: '30 9 * * *'
+    - cron: '10 11 * * *'
   #push:
   #  #branches: [ "main" ]
   #  tags: [ '1.*' ]
@@ -43,6 +43,9 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
         with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           #tags: ${{ steps.meta.outputs.tags }}
