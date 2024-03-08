@@ -2,11 +2,13 @@
 
 A builder image for building static rust binaries for amd64 and arm64 platforms.
 
-Created every day from Rust nightly at 10am CET.
+Created every day from Rust nightly at 6am UTC
 
 # Usage
 
 ~~~~
-FROM ghcr.io/ecociel/rust-builder:<tag> as builder
+FROM ghcr.io/ecociel/rust-builder:nightly as builder
 
-TBD
+..
+~~~~
+
