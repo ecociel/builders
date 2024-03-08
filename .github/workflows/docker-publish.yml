@@ -3,7 +3,7 @@ name: Docker
 on:
   schedule:
     #- cron: '0 10 * * *'
-    - cron: '42 13 * * *'
+    - cron: '55 13 * * *'
   #push:
   #  #branches: [ "main" ]
   #  tags: [ '1.*' ]
@@ -31,9 +31,9 @@ jobs:
         #if: github.event_name != 'pull_request'
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
-          #registry: ${{ env.REGISTRY }}
-          registry: ghcr.io
-          username: ${{ github.actor }}
+          registry: ${{ env.REGISTRY }}
+          #username: ${{ github.actor }}
+          username: ecociel
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Extract Docker metadata
         id: meta
