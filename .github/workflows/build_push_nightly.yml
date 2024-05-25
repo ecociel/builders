@@ -1,11 +1,11 @@
 name: Build and push nightly
 
 on:
-  schedule:
-    - cron: '0 7 * * *'
-  #push:
-  #  #branches: [ "main" ]
-  #  tags: [ '1.*' ]
+  #schedule:
+  #  - cron: '0 7 * * *'
+  push:
+    branches: [ "xmain" ]
+    #tags: [ '1.*' ]
 
 env:
   REGISTRY: ghcr.io
