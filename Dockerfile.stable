@@ -8,29 +8,9 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     PATH=/usr/local/cargo/bin:$PATH
 
 RUN apt update -y && apt install -y \
-    ca-certificates \
-    gcc \
-    libc6-dev \
-    wget \
-    libssl-dev \
-    libprotobuf-dev \
-    protobuf-compiler \
-    qemu-user \
-    gnupg \
-    lsb-release \
-    software-properties-common \
-    libpq5 \
-    sqlite3 \
-    libsqlite3-dev \
-    musl-tools \
-    musl-dev \
-    build-essential \
-    gcc-multilib \
-    clang \
-    llvm \
-    libunwind-dev \
-    gcc-aarch64-linux-gnu \
-    libc6-dev-arm64-cross
+    ca-certificates gcc libc6-dev wget libssl-dev libprotobuf-dev protobuf-compiler \
+    qemu-user gnupg lsb-release software-properties-common libpq5 sqlite3 libsqlite3-dev \
+    musl-tools build-essential clang llvm libunwind-dev gcc-aarch64-linux-gnu libc6-dev-arm64-cross
 
 COPY llvm-snapshot.gpg.key llvm-snapshot.gpg.key
 ARG llvm_version=18
