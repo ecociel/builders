@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:buster
 MAINTAINER ecociel <devs@ecociel.ch>
 
 ARG TARGETARCH
