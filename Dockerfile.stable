@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 MAINTAINER ecociel <devs@ecociel.ch>
 
 ARG TARGETARCH
@@ -7,32 +7,30 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH
 
-RUN echo "deb http://deb.debian.org/debian buster-backports main" >> /etc/apt/sources.list \
-    && apt update -y \
-    && apt install -y \
-       ca-certificates \
-       gcc \
-       libc6-dev \
-       wget \
-       libssl-dev \
-       libprotobuf-dev \
-       protobuf-compiler \
-       qemu-user \
-       gnupg \
-       lsb-release \
-       software-properties-common \
-       libpq5 \
-       sqlite3 \
-       libsqlite3-dev \
-       musl-tools \
-       musl-dev \
-       build-essential \
-       gcc-multilib \
-       clang \
-       llvm \
-       libunwind-dev
-
-RUN apt install -y gcc-8-aarch64-linux-gnu=8.3.0-1~deb10u1
+RUN apt update -y && apt install -y \
+    ca-certificates \
+    gcc \
+    libc6-dev \
+    wget \
+    libssl-dev \
+    libprotobuf-dev \
+    protobuf-compiler \
+    qemu-user \
+    gnupg \
+    lsb-release \
+    software-properties-common \
+    libpq5 \
+    sqlite3 \
+    libsqlite3-dev \
+    musl-tools \
+    musl-dev \
+    build-essential \
+    gcc-multilib \
+    clang \
+    llvm \
+    libunwind-dev \
+    gcc-aarch64-linux-gnu \
+    libc6-dev-arm64-cross
 
 COPY llvm-snapshot.gpg.key llvm-snapshot.gpg.key
 ARG llvm_version=18
